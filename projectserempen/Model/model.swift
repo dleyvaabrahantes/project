@@ -14,10 +14,36 @@
 //  {
 import Foundation
 
-
-struct Post: Codable{
+// MARK: - Post
+struct Post: Codable, Identifiable{
     var userId : Int
     var id : Int
     var title: String
     var body: String
+}
+
+
+// MARK: - User
+struct User: Codable {
+    let id: Int
+    let name, username, email: String
+    let address: Address
+    let phone, website: String
+    let company: Company
+}
+
+// MARK: - Address
+struct Address: Codable {
+    let street, suite, city, zipcode: String
+    let geo: Geo
+}
+
+// MARK: - Geo
+struct Geo: Codable {
+    let lat, lng: String
+}
+
+// MARK: - Company
+struct Company: Codable {
+    let name, catchPhrase, bs: String
 }

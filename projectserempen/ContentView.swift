@@ -18,21 +18,24 @@ struct ContentView: View {
                         ProgressView()
                             .padding()
                     } else {
-                        VStack{
-                            ForEach(viewModel.posts!, id:\.id){item in
-                                Text(item.title)
+                        VStack(alignment: .leading){
+                            
+                            ForEach(viewModel.posts!, id: \.id){item in
+                                NavigationLink(destination: EmptyView()){
+                                PostView(post: item)
                                 
+                                }
                             }
                         }
                     }
                     
                 }
-          
+                
             }
+            
+            .navigationTitle("Project")
+        }
         
-        .navigationTitle("Project")
-    }
-    
     }
 }
 
