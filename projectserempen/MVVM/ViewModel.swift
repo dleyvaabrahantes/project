@@ -13,12 +13,16 @@ class ViewModel: ObservableObject {
     @Published var offset: Int = 0
     @Published var problem = ""
     
-    @Published var usuario:[User]? = []
+
+    @Published var usuarios: User? = nil
     
     init(){
         
         self.requestCode()
+       
+        
     }
+    
     
     func requestCode() {
         let url = URL(string: "https://jsonplaceholder.typicode.com/posts")!
@@ -58,9 +62,10 @@ class ViewModel: ObservableObject {
         
     }
     
-    func requestCode(user: String){
-        let url = URL(string: "https://jsonplaceholder.typicode.com/users\(user)")!
-        var request = URLRequest(url: url)
+    func requestUserDetail(_ userId: Int){
+        
+        let url = URL(string: "https://jsonplaceholder.typicode.com/users/\(userId)")!
+        let request = URLRequest(url: url)
         
      //   request.setValue("https://developer.marvel.com/", forHTTPHeaderField: "Referer")
         
@@ -80,10 +85,10 @@ class ViewModel: ObservableObject {
                 return
             }
             do{
-                let user = try JSONDecoder().decode([User].self, from: jsonData)
+                let user = try JSONDecoder().decode(User.self, from: jsonData)
                 DispatchQueue.main.async {
-                    self.usuario = user
-                   // self.comics?.append(contentsOf: comics.data.results)
+                   
+                    self.usuarios = user
                 }
                 
             }catch{

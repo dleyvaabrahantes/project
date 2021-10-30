@@ -10,13 +10,20 @@ import SwiftUI
 struct PostView: View {
     var post: Post
     
+    
     var body: some View {
+        HStack(spacing: 20){
+            if post.isfavorite!{
+                Image(systemName: "star.fill")
+                    .foregroundColor(.yellow)
+            }
         VStack(alignment: .leading, spacing: 10){
             Text(post.title)
                 .font(.title)
             Text(post.body)
                 .font(.body)
                 
+        }
         }
         .padding(.horizontal)
     }

@@ -12,30 +12,66 @@ struct ContentView: View {
     
     var body: some View {
         NavigationView{
-            ScrollView{
-                if let posts = viewModel.posts {
-                    if posts.isEmpty {
-                        ProgressView()
-                            .padding()
-                    } else {
-                        VStack(alignment: .leading){
+            
+            if let posts = viewModel.posts{
+                if posts.isEmpty{
+                    ProgressView()
+                        .padding()
+                        .toolbar{
                             
-                            ForEach(viewModel.posts!, id: \.id){item in
-                                NavigationLink(destination: EmptyView()){
+                                ToolbarItem(placement: .navigationBarTrailing) {
+                                    Button(action: {viewModel.requestCode()}){
+                                        Image(systemName: "arrow.counterclockwise")
+                                    }
+                                    
+                                }
+                            
+                                
+                            
+                            
+                            
+                        }
+                    
+                }else {
+                    List{
+                        ForEach(viewModel.posts!, id: \.id){item in
+                            NavigationLink(destination: DetailView(userId: item.userId)){
                                 PostView(post: item)
                                 
-                                }
                             }
                         }
+                        .onDelete(perform: delete)
                     }
                     
+                    .navigationTitle("Project")
+                    .toolbar{
+                        ToolbarItem(placement: .bottomBar) {
+                            Button(action: {viewModel.posts?.removeAll()}){
+                                Image(systemName: "trash")
+                            }
+                        }
+                            ToolbarItem(placement: .navigationBarTrailing) {
+                                Button(action: {viewModel.requestCode()}){
+                                    Image(systemName: "arrow.counterclockwise")
+                                }
+                                
+                            }
+                            
+                        
+                        
+                        
+                    }
                 }
                 
             }
             
-            .navigationTitle("Project")
         }
         
+        
+    }
+    
+    func delete(at offsets: IndexSet) {
+        viewModel.posts!.remove(atOffsets: offsets)
     }
 }
 
@@ -44,3 +80,39 @@ struct ContentView_Previews: PreviewProvider {
         ContentView()
     }
 }
+
+/*
+ {
+ ScrollView{
+ if let posts = viewModel.posts {
+ if posts.isEmpty {
+ ProgressView()
+ .padding()
+ } else {
+ VStack(alignment: .leading){
+ 
+ ForEach(viewModel.posts!, id: \.id){item in
+ NavigationLink(destination: DetailView(userId: item.userId)
+ .navigationTitle(item.title)
+ .toolbar{
+ Button(action: {print("Hola")}, label: {
+ Image(systemName: "star")
+ })
+ }){
+ PostView(post: item)
+ 
+ }
+ }
+ 
+ 
+ }
+ }
+ 
+ }
+ 
+ }
+ 
+ .navigationTitle("Project")
+ }
+ 
+ */

@@ -20,7 +20,12 @@ struct Post: Codable, Identifiable{
     var id : Int
     var title: String
     var body: String
+    var isfavorite: Bool? = false
+    var isVisited: Bool?
+    
+    
 }
+
 
 
 // MARK: - User
@@ -30,6 +35,7 @@ struct User: Codable {
     let address: Address
     let phone, website: String
     let company: Company
+    
 }
 
 // MARK: - Address

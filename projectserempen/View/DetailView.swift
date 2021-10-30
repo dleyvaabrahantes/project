@@ -34,58 +34,44 @@ import MapKit
 //}
 //}
 struct DetailView: View {
-      @State var post: Post
-     @State var user: User
+    @State var userId: Int
+    @StateObject var viewModel = ViewModel()
+    
+    
     
     var body: some View {
-        ScrollView(.vertical){
-            VStack(alignment: .center){
-                Text("David Leyva")
-                    .font(.title)
-                Text("username")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
+            
+        List {
+            
+            
+            Section(header: Text("Telefono")) {
+                Text(viewModel.usuarios?.phone ?? "")
             }
             
-            HStack{
-                VStack(alignment: .leading){
-                    Group{
-                Text("Email:")
-                    .font(.subheadline)
-                    .foregroundColor(.secondary)
-                        Text("dleyvaabrahantes@gmail.com")
-                            .padding(.top,2)
-                    }
-                    Divider()
-                    Text("Direccion")
-                        .font(.subheadline)
-                        .foregroundColor(.secondary)
-                    Text("dleyvaabrahantes@gmail.com")
-                        .padding(.top,2)
-                }
-                Spacer()
-               
+            Section(header: Text("Direccion")) {
+                Text(viewModel.usuarios?.address.street ?? "")
+                Text(viewModel.usuarios?.address.city ?? "")
             }
-            .padding()
-            
-            
-            
-        }.frame(maxWidth: .infinity)
+            Section(header: Text("Website")) {
+                Text(viewModel.usuarios?.website ?? "")
+            }
+        }
+       
+        .onAppear{
+            viewModel.requestUserDetail(userId)
+        }
         
         
         
-        
-        
-    }
     
-    //    private func setCoordinate(latitude: String, longitude: String) {
-    //            region = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-    //        }
     
+    
+}
+
 }
 
 struct DetailView_Previews: PreviewProvider {
     static var previews: some View {
-        DetailView()
+        DetailView(userId: 2)
     }
 }

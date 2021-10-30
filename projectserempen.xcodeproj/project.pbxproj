@@ -10,6 +10,7 @@
 		633CC98F272C726000474B4B /* PostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633CC98E272C726000474B4B /* PostView.swift */; };
 		633CC991272C74E100474B4B /* DetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633CC990272C74E100474B4B /* DetailView.swift */; };
 		633CC993272CB17800474B4B /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633CC992272CB17800474B4B /* MapView.swift */; };
+		633CC995272D1A8200474B4B /* FavoriteBtn.swift in Sources */ = {isa = PBXBuildFile; fileRef = 633CC994272D1A8200474B4B /* FavoriteBtn.swift */; };
 		63401E63272C6A6B004D948B /* projectserempenApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63401E62272C6A6B004D948B /* projectserempenApp.swift */; };
 		63401E65272C6A6B004D948B /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63401E64272C6A6B004D948B /* ContentView.swift */; };
 		63401E67272C6A6D004D948B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 63401E66272C6A6D004D948B /* Assets.xcassets */; };
@@ -42,6 +43,7 @@
 		633CC98E272C726000474B4B /* PostView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostView.swift; sourceTree = "<group>"; };
 		633CC990272C74E100474B4B /* DetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailView.swift; sourceTree = "<group>"; };
 		633CC992272CB17800474B4B /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		633CC994272D1A8200474B4B /* FavoriteBtn.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteBtn.swift; sourceTree = "<group>"; };
 		63401E5F272C6A6B004D948B /* projectserempen.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = projectserempen.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		63401E62272C6A6B004D948B /* projectserempenApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = projectserempenApp.swift; sourceTree = "<group>"; };
 		63401E64272C6A6B004D948B /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -154,6 +156,7 @@
 				633CC98E272C726000474B4B /* PostView.swift */,
 				633CC990272C74E100474B4B /* DetailView.swift */,
 				633CC992272CB17800474B4B /* MapView.swift */,
+				633CC994272D1A8200474B4B /* FavoriteBtn.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -296,6 +299,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				633CC995272D1A8200474B4B /* FavoriteBtn.swift in Sources */,
 				633CC993272CB17800474B4B /* MapView.swift in Sources */,
 				63401E65272C6A6B004D948B /* ContentView.swift in Sources */,
 				633CC991272C74E100474B4B /* DetailView.swift in Sources */,
