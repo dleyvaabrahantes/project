@@ -18,8 +18,6 @@ struct PostView: View {
     
     
     var body: some View {
-        //  HStack(spacing: 20){
-        //   FavoriteBtn(isSet: $favorita)
         VStack(alignment: .leading, spacing: 10){
             HStack(alignment: .top, spacing: 10){
                 if post.isRead  {

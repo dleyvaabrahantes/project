@@ -6,11 +6,15 @@
 //
 
 import SwiftUI
+import Network
 
 struct ContentView: View {
     @StateObject var viewModel = ViewModel()
     @State private var showFavoriteOnly = false
     @Environment(\.managedObjectContext) var managedObjectContext
+    @State private var showingAlert = false
+    let monitor = NWPathMonitor()
+
     
     @FetchRequest(
         entity: PostEntity.entity(),
@@ -28,6 +32,7 @@ struct ContentView: View {
     }
     var body: some View {
         NavigationView{
+            
             
             
             if let posts = viewModel.posts{
@@ -88,7 +93,9 @@ struct ContentView: View {
                         
                         
                     }
-                    
+//                    .onAppear{
+//                        checkInternet()
+//                    }
                     .navigationTitle("Project")
                     .toolbar{
                         ToolbarItem(placement: .bottomBar) {
@@ -106,6 +113,8 @@ struct ContentView: View {
                         ToolbarItem(placement: .navigationBarLeading) {
                             Button(action: {saveArray()}){
                                 Image(systemName: "square.and.arrow.down")
+                            }.alert("Saved data Room", isPresented: $showingAlert) {
+                                Button("OK", role: .cancel) { }
                             }
                             
                         }
@@ -145,6 +154,18 @@ struct ContentView: View {
         }
     }
     
+    func checkInternet(){
+        monitor.pathUpdateHandler = { path in
+            if path.status == .satisfied {
+                print("We're connected!")
+            } else {
+                print("No connection.")
+            }
+
+            print(path.isExpensive)
+        }
+    }
+    
     func saveArray(){
         
         for item in viewModel.posts! {
@@ -159,7 +180,8 @@ struct ContentView: View {
         }
         do {
             try managedObjectContext.save()
-            print("Success")
+            print("Succes")
+            showingAlert = true
         } catch {
             print("Error saving: \(error)")
         }

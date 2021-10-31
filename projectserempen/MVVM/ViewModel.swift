@@ -18,7 +18,7 @@ class ViewModel: ObservableObject {
     
     func requestCode() {
         let url = URL(string: "https://jsonplaceholder.typicode.com/posts")!
-        var request = URLRequest(url: url)
+        let request = URLRequest(url: url)
         let session = URLSession.shared
         let task = session.dataTask(with: request) {(data, response, error) in
             
