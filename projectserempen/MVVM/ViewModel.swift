@@ -13,13 +13,13 @@ class ViewModel: ObservableObject {
     @Published var offset: Int = 0
     @Published var problem = ""
     
-
+    
     @Published var usuarios: User? = nil
     
     init(){
         
         self.requestCode()
-       
+        
         
     }
     
@@ -28,7 +28,7 @@ class ViewModel: ObservableObject {
         let url = URL(string: "https://jsonplaceholder.typicode.com/posts")!
         var request = URLRequest(url: url)
         
-     //   request.setValue("https://developer.marvel.com/", forHTTPHeaderField: "Referer")
+        //   request.setValue("https://developer.marvel.com/", forHTTPHeaderField: "Referer")
         
         let session = URLSession.shared
         let task = session.dataTask(with: request) {(data, response, error) in
@@ -49,7 +49,7 @@ class ViewModel: ObservableObject {
                 let postsElement = try JSONDecoder().decode([Post].self, from: jsonData)
                 DispatchQueue.main.async {
                     self.posts = postsElement
-                   // self.comics?.append(contentsOf: comics.data.results)
+                    // self.comics?.append(contentsOf: comics.data.results)
                 }
                 
             }catch{
@@ -67,7 +67,7 @@ class ViewModel: ObservableObject {
         let url = URL(string: "https://jsonplaceholder.typicode.com/users/\(userId)")!
         let request = URLRequest(url: url)
         
-     //   request.setValue("https://developer.marvel.com/", forHTTPHeaderField: "Referer")
+        //   request.setValue("https://developer.marvel.com/", forHTTPHeaderField: "Referer")
         
         let session = URLSession.shared
         let task = session.dataTask(with: request) {(data, response, error) in
@@ -87,7 +87,7 @@ class ViewModel: ObservableObject {
             do{
                 let user = try JSONDecoder().decode(User.self, from: jsonData)
                 DispatchQueue.main.async {
-                   
+                    
                     self.usuarios = user
                 }
                 

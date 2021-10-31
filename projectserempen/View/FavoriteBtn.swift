@@ -8,18 +8,18 @@
 import SwiftUI
 
 struct FavoriteBtn: View {
-   
-        @Binding var isSet: Bool
-        
-        var body: some View {
-            Button(action: {
-                isSet.toggle()
-            }, label: {
-                Image(systemName: isSet ? "star.fill" : "star")
-                    .foregroundColor(isSet ? Color.yellow : Color.gray)
-                    .font(.system(size: 20))
-            })
-        }
+    
+    @Binding var isSet: Bool
+    
+    var body: some View {
+        Button(action: {
+            isSet.toggle()
+        }, label: {
+            Image(systemName: isSet ? "star.fill" : "star")
+                .foregroundColor(isSet ? Color.yellow : Color.gray)
+                .font(.system(size: 20))
+        })
+    }
     
 }
 

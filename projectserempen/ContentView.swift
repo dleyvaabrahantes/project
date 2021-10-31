@@ -9,7 +9,14 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject var viewModel = ViewModel()
+    @State private var showFavoriteOnly = false
     
+
+    var filteredPost:[Post]{
+        viewModel.posts!.filter({
+            post in (!showFavoriteOnly || post.isFavorite)
+        })
+    }
     var body: some View {
         NavigationView{
             
@@ -19,14 +26,14 @@ struct ContentView: View {
                         .padding()
                         .toolbar{
                             
-                                ToolbarItem(placement: .navigationBarTrailing) {
-                                    Button(action: {viewModel.requestCode()}){
-                                        Image(systemName: "arrow.counterclockwise")
-                                    }
-                                    
+                            ToolbarItem(placement: .navigationBarTrailing) {
+                                Button(action: {viewModel.requestCode()}){
+                                    Image(systemName: "arrow.counterclockwise")
                                 }
-                            
                                 
+                            }
+                            
+                            
                             
                             
                             
@@ -34,13 +41,44 @@ struct ContentView: View {
                     
                 }else {
                     List{
-                        ForEach(viewModel.posts!, id: \.id){item in
-                            NavigationLink(destination: DetailView(userId: item.userId)){
+                        Toggle(isOn: $showFavoriteOnly, label: {
+                            Text("Favoritos Only")
+                        })
+                        ForEach(filteredPost, id: \.id){item in
+                            NavigationLink(destination: DetailView(userId: item.userId).onAppear{
+                                setRead(item)
+                            }){
+                                
                                 PostView(post: item)
                                 
                             }
+                            .swipeActions(allowsFullSwipe: false) {
+                                Button {
+                                    setFavorite(item)
+                                } label: {
+                                    Label("Favorito", systemImage: "star.fill")
+                                }
+                                .tint(.blue)
+                                
+                                Button(role: .destructive) {
+                                    deleteObj(item)
+                                } label: {
+                                    Label("Delete", systemImage: "trash.fill")
+                                }
+                            }
+                            .swipeActions(edge: .leading) {
+                                Button {
+                                    setRead(item)
+                                } label: {
+                                    Label("leido", systemImage: "star.fill")
+                                }
+                                .tint(.blue)
+                                
+                                
+                            }
                         }
-                        .onDelete(perform: delete)
+                        
+                        
                     }
                     
                     .navigationTitle("Project")
@@ -50,13 +88,13 @@ struct ContentView: View {
                                 Image(systemName: "trash")
                             }
                         }
-                            ToolbarItem(placement: .navigationBarTrailing) {
-                                Button(action: {viewModel.requestCode()}){
-                                    Image(systemName: "arrow.counterclockwise")
-                                }
-                                
+                        ToolbarItem(placement: .navigationBarTrailing) {
+                            Button(action: {viewModel.requestCode()}){
+                                Image(systemName: "arrow.counterclockwise")
                             }
                             
+                        }
+                        
                         
                         
                         
@@ -73,6 +111,26 @@ struct ContentView: View {
     func delete(at offsets: IndexSet) {
         viewModel.posts!.remove(atOffsets: offsets)
     }
+    
+    func deleteObj(_ item: Post) {
+        if let indexToDelete = viewModel.posts?.firstIndex(where: {$0.id == item.id}){
+        viewModel.posts!.remove(at: indexToDelete)
+        }
+    }
+    
+    func setFavorite(_ item: Post) {
+        if let indexToFav = viewModel.posts?.firstIndex(where: {$0.id == item.id}){
+            viewModel.posts![indexToFav].isFavorite.toggle()
+        }
+    }
+    
+    func setRead(_ item: Post) {
+        if let indexToFav = viewModel.posts?.firstIndex(where: {$0.id == item.id}){
+            viewModel.posts![indexToFav].isRead.toggle()
+        }
+    }
+    
+   
 }
 
 struct ContentView_Previews: PreviewProvider {

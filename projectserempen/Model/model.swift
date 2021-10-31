@@ -13,15 +13,37 @@
 //  },
 //  {
 import Foundation
+import MapKit
+
 
 // MARK: - Post
-struct Post: Codable, Identifiable{
+struct Post: Decodable{
+    
     var userId : Int
     var id : Int
     var title: String
     var body: String
-    var isfavorite: Bool? = false
-    var isVisited: Bool?
+    
+    var isFavorite: Bool
+    var isRead: Bool
+    
+    
+    enum CodingKeys: String, CodingKey {
+        
+        case userId,id, title, body, isFavorite, isRead
+    }
+    
+    init(from decoder: Decoder) throws {
+        let container = try decoder.container(keyedBy: CodingKeys.self)
+        self.userId = try container.decode(Int.self, forKey: .userId)
+        self.id = try container.decode(Int.self, forKey: .id)
+        self.title = try container.decode(String.self, forKey: .title)
+        self.body = try container.decode(String.self, forKey: .body)
+        self.isFavorite = try container.decodeIfPresent(Bool.self, forKey: .isFavorite) ?? false
+        self.isRead = try container.decodeIfPresent(Bool.self, forKey: .isRead) ?? true
+    }
+    
+    
     
     
 }
@@ -36,6 +58,9 @@ struct User: Codable {
     let phone, website: String
     let company: Company
     
+    var locationCoordinate: CLLocationCoordinate2D{
+        CLLocationCoordinate2D(latitude: Double(address.geo.lat)!, longitude: Double(address.geo.lng)!)
+    }
 }
 
 // MARK: - Address
