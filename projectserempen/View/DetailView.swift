@@ -19,6 +19,9 @@ struct DetailView: View {
         
         List {
             
+            Section(header: Text("Nombre")) {
+                Text(viewModel.usuarios?.name ?? "")
+            }
             
             Section(header: Text("Telefono")) {
                 Text(viewModel.usuarios?.phone ?? "")

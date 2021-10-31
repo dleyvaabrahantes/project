@@ -26,12 +26,16 @@ struct ContentView: View {
                         .padding()
                         .toolbar{
                             
-                            ToolbarItem(placement: .navigationBarTrailing) {
+                            ToolbarItemGroup(placement: .navigationBarTrailing) {
                                 Button(action: {viewModel.requestCode()}){
                                     Image(systemName: "arrow.counterclockwise")
                                 }
                                 
                             }
+                            
+                                
+                                
+                            
                             
                             
                             
@@ -63,14 +67,14 @@ struct ContentView: View {
                                 Button(role: .destructive) {
                                     deleteObj(item)
                                 } label: {
-                                    Label("Delete", systemImage: "trash.fill")
+                                    Label("Eliminar", systemImage: "trash.fill")
                                 }
                             }
                             .swipeActions(edge: .leading) {
                                 Button {
                                     setRead(item)
                                 } label: {
-                                    Label("leido", systemImage: "star.fill")
+                                    Label("leido", systemImage: "exclamationmark.circle")
                                 }
                                 .tint(.blue)
                                 
@@ -91,6 +95,13 @@ struct ContentView: View {
                         ToolbarItem(placement: .navigationBarTrailing) {
                             Button(action: {viewModel.requestCode()}){
                                 Image(systemName: "arrow.counterclockwise")
+                            }
+                            
+                        }
+                        
+                        ToolbarItem(placement: .navigationBarLeading) {
+                            Button(action: {viewModel.requestCode()}){
+                                Image(systemName: "square.and.arrow.down")
                             }
                             
                         }
