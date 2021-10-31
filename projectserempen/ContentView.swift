@@ -16,9 +16,9 @@ struct ContentView: View {
         entity: PostEntity.entity(),
         sortDescriptors: [
             NSSortDescriptor(keyPath: \PostEntity.id, ascending: true),
-            NSSortDescriptor(keyPath: \PostEntity.userId, ascending: false)
+            
         ]
-    ) var languages: FetchedResults<PostEntity>
+    ) var arrayEntity: FetchedResults<PostEntity>
     
     
     var filteredPost:[Post]{
@@ -43,14 +43,6 @@ struct ContentView: View {
                                 
                             }
                             
-                            
-                            
-                            
-                            
-                            
-                            
-                            
-                            
                         }
                     
                 }else {
@@ -58,6 +50,8 @@ struct ContentView: View {
                         Toggle(isOn: $showFavoriteOnly, label: {
                             Text("Favoritos Only")
                         })
+                        
+                        
                         ForEach(filteredPost, id: \.id){item in
                             NavigationLink(destination: DetailView(userId: item.userId).onAppear{
                                 setRead(item)
@@ -154,21 +148,21 @@ struct ContentView: View {
     func saveArray(){
         
         for item in viewModel.posts! {
-                let post = PostEntity(context: managedObjectContext)
+            let post = PostEntity(context: managedObjectContext)
             post.setValue(item.id, forKey: "id")
             post.setValue(item.userId, forKey: "userId")
             post.setValue(item.title, forKey: "title")
             post.setValue(item.body, forKey: "body")
             post.setValue(item.isRead, forKey: "isRead")
             post.setValue(item.isFavorite, forKey: "isFavorite")
-                
-            }
-            do {
-                try managedObjectContext.save()
-                print("Success")
-            } catch {
-                print("Error saving: \(error)")
-            }
+            
+        }
+        do {
+            try managedObjectContext.save()
+            print("Success")
+        } catch {
+            print("Error saving: \(error)")
+        }
     }
     
     
