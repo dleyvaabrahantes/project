@@ -20,6 +20,8 @@
 		63401E80272C6A6D004D948B /* projectserempenUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63401E7F272C6A6D004D948B /* projectserempenUITestsLaunchTests.swift */; };
 		63401E90272C6BB3004D948B /* model.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63401E8F272C6BB3004D948B /* model.swift */; };
 		63401E92272C6C8A004D948B /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63401E91272C6C8A004D948B /* ViewModel.swift */; };
+		63E7548B272EC07600F78C87 /* Model.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 63E75489272EC07600F78C87 /* Model.xcdatamodeld */; };
+		63E7548D272EC0FD00F78C87 /* Persistent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 63E7548C272EC0FD00F78C87 /* Persistent.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -56,6 +58,8 @@
 		63401E7F272C6A6D004D948B /* projectserempenUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = projectserempenUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		63401E8F272C6BB3004D948B /* model.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = model.swift; sourceTree = "<group>"; };
 		63401E91272C6C8A004D948B /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		63E7548A272EC07600F78C87 /* Model.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = Model.xcdatamodel; sourceTree = "<group>"; };
+		63E7548C272EC0FD00F78C87 /* Persistent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persistent.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +90,7 @@
 		63401E56272C6A6B004D948B = {
 			isa = PBXGroup;
 			children = (
+				63E75489272EC07600F78C87 /* Model.xcdatamodeld */,
 				63401E61272C6A6B004D948B /* projectserempen */,
 				63401E72272C6A6D004D948B /* projectserempenTests */,
 				63401E7C272C6A6D004D948B /* projectserempenUITests */,
@@ -146,6 +151,7 @@
 			isa = PBXGroup;
 			children = (
 				63401E8F272C6BB3004D948B /* model.swift */,
+				63E7548C272EC0FD00F78C87 /* Persistent.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -301,9 +307,11 @@
 			files = (
 				633CC995272D1A8200474B4B /* FavoriteBtn.swift in Sources */,
 				633CC993272CB17800474B4B /* MapView.swift in Sources */,
+				63E7548D272EC0FD00F78C87 /* Persistent.swift in Sources */,
 				63401E65272C6A6B004D948B /* ContentView.swift in Sources */,
 				633CC991272C74E100474B4B /* DetailView.swift in Sources */,
 				63401E90272C6BB3004D948B /* model.swift in Sources */,
+				63E7548B272EC07600F78C87 /* Model.xcdatamodeld in Sources */,
 				63401E92272C6C8A004D948B /* ViewModel.swift in Sources */,
 				633CC98F272C726000474B4B /* PostView.swift in Sources */,
 				63401E63272C6A6B004D948B /* projectserempenApp.swift in Sources */,
@@ -653,6 +661,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		63E75489272EC07600F78C87 /* Model.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				63E7548A272EC07600F78C87 /* Model.xcdatamodel */,
+			);
+			currentVersion = 63E7548A272EC07600F78C87 /* Model.xcdatamodel */;
+			path = Model.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 63401E57272C6A6B004D948B /* Project object */;
 }

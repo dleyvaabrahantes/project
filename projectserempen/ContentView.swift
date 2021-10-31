@@ -10,8 +10,17 @@ import SwiftUI
 struct ContentView: View {
     @StateObject var viewModel = ViewModel()
     @State private var showFavoriteOnly = false
+    @Environment(\.managedObjectContext) var managedObjectContext
     
-
+    @FetchRequest(
+        entity: PostEntity.entity(),
+        sortDescriptors: [
+            NSSortDescriptor(keyPath: \PostEntity.id, ascending: true),
+            NSSortDescriptor(keyPath: \PostEntity.userId, ascending: false)
+        ]
+    ) var languages: FetchedResults<PostEntity>
+    
+    
     var filteredPost:[Post]{
         viewModel.posts!.filter({
             post in (!showFavoriteOnly || post.isFavorite)
@@ -19,6 +28,7 @@ struct ContentView: View {
     }
     var body: some View {
         NavigationView{
+            
             
             if let posts = viewModel.posts{
                 if posts.isEmpty{
@@ -33,8 +43,8 @@ struct ContentView: View {
                                 
                             }
                             
-                                
-                                
+                            
+                            
                             
                             
                             
@@ -62,7 +72,7 @@ struct ContentView: View {
                                 } label: {
                                     Label("Favorito", systemImage: "star.fill")
                                 }
-                                .tint(.blue)
+                                .tint(.yellow)
                                 
                                 Button(role: .destructive) {
                                     deleteObj(item)
@@ -100,7 +110,7 @@ struct ContentView: View {
                         }
                         
                         ToolbarItem(placement: .navigationBarLeading) {
-                            Button(action: {viewModel.requestCode()}){
+                            Button(action: {saveArray()}){
                                 Image(systemName: "square.and.arrow.down")
                             }
                             
@@ -125,7 +135,7 @@ struct ContentView: View {
     
     func deleteObj(_ item: Post) {
         if let indexToDelete = viewModel.posts?.firstIndex(where: {$0.id == item.id}){
-        viewModel.posts!.remove(at: indexToDelete)
+            viewModel.posts!.remove(at: indexToDelete)
         }
     }
     
@@ -141,7 +151,27 @@ struct ContentView: View {
         }
     }
     
-   
+    func saveArray(){
+        
+        for item in viewModel.posts! {
+                let post = PostEntity(context: managedObjectContext)
+            post.setValue(item.id, forKey: "id")
+            post.setValue(item.userId, forKey: "userId")
+            post.setValue(item.title, forKey: "title")
+            post.setValue(item.body, forKey: "body")
+            post.setValue(item.isRead, forKey: "isRead")
+            post.setValue(item.isFavorite, forKey: "isFavorite")
+                
+            }
+            do {
+                try managedObjectContext.save()
+                print("Success")
+            } catch {
+                print("Error saving: \(error)")
+            }
+    }
+    
+    
 }
 
 struct ContentView_Previews: PreviewProvider {
@@ -150,38 +180,3 @@ struct ContentView_Previews: PreviewProvider {
     }
 }
 
-/*
- {
- ScrollView{
- if let posts = viewModel.posts {
- if posts.isEmpty {
- ProgressView()
- .padding()
- } else {
- VStack(alignment: .leading){
- 
- ForEach(viewModel.posts!, id: \.id){item in
- NavigationLink(destination: DetailView(userId: item.userId)
- .navigationTitle(item.title)
- .toolbar{
- Button(action: {print("Hola")}, label: {
- Image(systemName: "star")
- })
- }){
- PostView(post: item)
- 
- }
- }
- 
- 
- }
- }
- 
- }
- 
- }
- 
- .navigationTitle("Project")
- }
- 
- */

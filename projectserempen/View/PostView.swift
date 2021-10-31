@@ -32,6 +32,7 @@ struct PostView: View {
                 Spacer()
                 if post.isFavorite  {
                     Image(systemName: "star.fill")
+                        .foregroundColor(.yellow)
                 } else {
                     Image(systemName: "star")
                 }
