@@ -9,31 +9,18 @@ import Foundation
 
 class ViewModel: ObservableObject {
     @Published var posts:[Post]? = []
-    
-    @Published var offset: Int = 0
-    @Published var problem = ""
-    
-    
     @Published var usuarios: User? = nil
     
     init(){
-        
         self.requestCode()
-        
-        
     }
     
     
     func requestCode() {
         let url = URL(string: "https://jsonplaceholder.typicode.com/posts")!
         var request = URLRequest(url: url)
-        
-        //   request.setValue("https://developer.marvel.com/", forHTTPHeaderField: "Referer")
-        
         let session = URLSession.shared
         let task = session.dataTask(with: request) {(data, response, error) in
-            
-            
             
             if let error = error{
                 
@@ -67,8 +54,6 @@ class ViewModel: ObservableObject {
         let url = URL(string: "https://jsonplaceholder.typicode.com/users/\(userId)")!
         let request = URLRequest(url: url)
         
-        //   request.setValue("https://developer.marvel.com/", forHTTPHeaderField: "Referer")
-        
         let session = URLSession.shared
         let task = session.dataTask(with: request) {(data, response, error) in
             
@@ -99,12 +84,5 @@ class ViewModel: ObservableObject {
         task.resume()
         
         
-    }
-    
-    //Create URL for WebImage object
-    func extractImage(path: String, ext: String)-> URL{
-        
-        
-        return URL(string: "\(path).\(ext)")!
     }
 }

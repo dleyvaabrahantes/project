@@ -13,8 +13,6 @@ struct DetailView: View {
     @State var userId: Int
     @StateObject var viewModel = ViewModel()
     
-    
-    
     var body: some View {
         
         List {
@@ -41,12 +39,6 @@ struct DetailView: View {
         .onAppear{
             viewModel.requestUserDetail(userId)
         }
-        
-        
-        
-        
-        
-        
     }
     
 }
